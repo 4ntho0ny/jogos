@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<title>Lista de jogos</title>
+
+<link rel="stylesheet"
+	th:href="@{/bootstrap-5.3.0-alpha1-dist/css/bootstrap.min.css}">
+<script th:src="@{/jquery-3.6.3/jquery-3.6.3.js}"></script>
+<script th:src="@{/bootstrap-5.3.0-alpha1-dist/js/bootstrap.min.js}"></script>
+
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+
+			<div class="col">
+				<h1>Jogos</h1>
+				<a class="btn btn-primary" th:href="@{/novo}">Cadastrar jogos</a>
+				<a class="btn btn-primary" th:href="@{/estilos/novo}">Cadastrar estilos</a>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Nome</th>
+							<th>Desenvolvedor</th>
+							<th>Valor</th>
+							<th>Estilo</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:if="${jogos.empty}">
+							<td colspan="2">Sem jogos cadastrados</td>
+						<tr th:each="jogo : ${jogos}">
+							<td><span th:text="${jogo.nome}"> Nome </span></td>
+							<td><span th:text="${jogo.dev}"> Desenvolvedor </span></td>
+							<td><span th:text="${jogo.valor}"> Valor </span></td>
+							<td><span th:text="${jogo.estilo.nomeEstilo}"> Estilo </span></td>
+							<td>
+								<a class="btn btn-outline-danger btn-sm" 
+									th:href="@{/admin/apagar/{id}(id=${jogo.id})}"
+									th:data-confirm-delete="|Você gostaria de apagar ${jogo.nome}?|"
+									onclick="if (!confirm(this.getAttribute('data-confirm-delete'))) return false">
+									Apagar
+								</a>
+					 		</td>				
+					 		<td>
+								<a class="btn btn-outline-primary btn-sm" 
+									th:href="@{/admin/editar/{id}(id=${jogo.id})}">
+									Editar
+								</a>
+					 		</td>	 
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

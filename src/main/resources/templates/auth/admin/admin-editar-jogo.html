@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<link rel="stylesheet" th:href="@{/bootstrap-5.3.0-alpha1-dist/css/bootstrap.min.css}">
+<script th:src="@{/jquery-3.6.3/jquery-3.6.3.js}"></script>
+<script th:src="@{/bootstrap-5.3.0-alpha1-dist/js/bootstrap.min.js}"></script>
+
+<style>
+	.mensagem {
+	  color: red;
+	}
+	.size {
+		width: 50%!important;
+		margin: 10px!important;
+	}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="row">  	
+    <div class="col">
+    	<h2>Cadastro de jogo</h2>
+    	<div class="alert alert-success alert-dismissible fade show" th:if="${mensagem}">
+			<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+			<span th:text="${mensagem}"></span>
+		</div>
+		<form action="#" th:action="@{/admin/editar/{id}(id=${jogo.id})}" th:object="${jogo}" method="post">
+			  
+			<div class="row mb-3">
+			    <label class="col-sm-1 col-form-label">Nome:</label>
+			    <div class="col-sm-5">
+			    	<input class="form-control" type="text" th:field="*{nome}"> 
+			    </div>
+			    <div class="col-sm-5"> 
+			    	<span class="mensagem" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
+			    </div>				
+			</div>
+			
+			<div class="row mb-3">
+			    <label class="col-sm-1 col-form-label">Desenvolvedor:</label>
+			    <div class="col-sm-3">
+			    	<input class="form-control" type="text" th:field="*{dev}"> 
+			    </div>
+				<div class="col-sm-5"> 
+			    	<span class="mensagem" th:if="${#fields.hasErrors('dev')}" th:errors="*{dev}"></span>
+			    </div>
+			</div>
+			
+			
+			<div class="row mb-3">
+			    <label class="col-sm-1 col-form-label">Valor:</label>
+			    <div class="col-sm-2">
+			    	<input class="form-control" type="number" th:field="*{valor}"> 
+			    </div>
+				<div class="col-sm-5"> 
+			    	<span class="mensagem" th:if="${#fields.hasErrors('valor')}" th:errors="*{valor}"></span>
+			    </div>
+			</div>
+			
+			<select class="form-select size" aria-label="Default select example" th:field="*{estilo}">
+				<div class="col-sm-5"> 
+			    	<span class="mensagem" th:if="${#fields.hasErrors('estilo')}" th:errors="*{estilo}"></span>
+			    </div>
+				<th:block th:each="estilo : ${listaEstilos}">
+					<option th:value="${estilo.id}" th:text="${estilo.nomeEstilo}"></option>
+				</th:block>
+			</select>
+
+			<input  class="btn btn-primary" type="submit" value="Gravar"/>
+		</form>
+		
+    </div>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+</body>
+</html>

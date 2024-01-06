@@ -1,0 +1,7 @@
+br\edu\ifms\jogos\controller\JogosController.class
+br\edu\ifms\jogos\Repository\JogosRepository.class
+br\edu\ifms\jogos\JogosApplication.class
+br\edu\ifms\jogos\Repository\EstiloRepository.class
+br\edu\ifms\jogos\controller\EstiloController.class
+br\edu\ifms\jogos\model\Estilo.class
+br\edu\ifms\jogos\model\Jogo.class
